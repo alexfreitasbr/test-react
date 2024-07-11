@@ -21,7 +21,6 @@ import { getPlantName } from 'action/getPlanetName'
 export function Card() {
 
     const [homeworld, setHomeworld] = useState<string >("")
-    const [fakeName, setFakeName] = useState("")
     const [profileDescriptions, setProfileDescriptions] = useState<PlanetType | null>(null)
 
     const profileContext = useContext(ProfileContext)
@@ -53,7 +52,6 @@ export function Card() {
             const planetProfile = planetProfiledata.results[0] as PlanetType
     
             setProfileDescriptions(planetProfile )
-            setFakeName(planetProfile.name)
         }
 
         if (profileContext.searchType === "people") {
@@ -101,7 +99,6 @@ export function Card() {
         
         const homeworldProfiledata = profileHomeworldInfo.data as PlanetType
         setProfileDescriptions(homeworldProfiledata)
-        setFakeName(homeworldProfiledata.name)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [homeworldProfile]);
 
@@ -129,7 +126,7 @@ export function Card() {
                         <Image src={getplanetImage(name)} alt={name} />
                         <ProfileTitle>
                             <p>Planeta</p>
-                            <FakeName onChange={(e)=>setFakeName(e.target.value)} value={fakeName}/>
+                            <FakeName  defaultValue={name}/>
                         </ProfileTitle>
                     </Profile>
                     <ProfileInfo>
