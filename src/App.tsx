@@ -1,9 +1,11 @@
+import { Page } from "components/page";
+
 
 
 function App() {
   return (
     <div className="App">
-      ola
+      <Page />
     </div>
   );
 }
