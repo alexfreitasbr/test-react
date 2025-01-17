@@ -31,7 +31,7 @@ export const Container = styled.div<ContainerProps>`
 
   .draggableDummy{
     position: relative;
-    background: transparent;
+    opacity: 0;
   }
 
   

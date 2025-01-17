@@ -40,12 +40,12 @@ export default function Canvas({wheelDiameter}: WheelProps) {
             ctx.canvas.width = canvasSize;
             ctx.canvas.height = canvasSize;
             //background
-            // ctx.beginPath();
-            // ctx.arc(middle.x, middle.y, middle.radius, 0, 2 * Math.PI);
-            // ctx.closePath();
-            // ctx.stroke();
-            // ctx.fillStyle = "black";
-            // ctx.fill();
+            ctx.beginPath();
+            ctx.arc(middle.x, middle.y, middle.radius, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fillStyle = "#888";
+            ctx.fill();
             // //end of background
 
             let previousRadian = 0;
@@ -71,7 +71,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
 
                 ctx.translate(middle.x, middle.y);
                 ctx.fillStyle = slice.textColor;
-                ctx.font = "36px Arial";
+                ctx.font = "bold 30px Arial";
                 ctx.rotate(previousRadian + slice.angle/2 + slice.angle *.09);
                 ctx.fillText(slice.label, (middle.radius - 20) - ctx.measureText(slice.label).width, 0);
                 ctx.restore();
@@ -83,16 +83,16 @@ export default function Canvas({wheelDiameter}: WheelProps) {
             previousRadian = 0;
 
             for (const slice of slices) {
-                const lastX = middle.x + (middle.radius -8) *Math.cos(previousRadian + slice.angle);
-                const lastY  = middle.y + (middle.radius -8) *Math.sin(previousRadian + slice.angle);
+                const lastX = middle.x + (middle.radius -5) *Math.cos(previousRadian + slice.angle);
+                const lastY  = middle.y + (middle.radius -5) *Math.sin(previousRadian + slice.angle);
                 ctx.beginPath();
                 
-                ctx.arc(lastX, lastY, 8, 0, 2 * Math.PI);
+                ctx.arc(lastX, lastY, 6, 0, 2 * Math.PI);
                 ctx.closePath();
-                ctx.fillStyle = "white";
+                ctx.fillStyle = "black";
                 ctx.fill();
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = "black";
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = "#bbb";
                 ctx.stroke();
 
                 previousRadian += slice.angle;

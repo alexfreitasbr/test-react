@@ -45,4 +45,27 @@ export const Container = styled.div<ContainerProps>`
 
   `;
 
+export const ThootContainer= styled.div`
+    display:flex;
+    position:absolute;
+    justify-content:center;
+    width:400px;
+    z-index:10;
+    top:69px;
+
+    .ref{
+      display:flex;
+      flex-direction:column;
+      justify-content:end;
+      width:32px;
+      height:90px;
+      rotate:-29deg;
+      .tooth{
+        width:32px;
+        color:red;
+      }
+    }
+`;
+
+
 
