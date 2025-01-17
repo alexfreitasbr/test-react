@@ -1,17 +1,16 @@
 import Canvas from "../canvas";
 import { useMemo } from 'react';
-import { Container} from './style'
+import { Container } from './style'
 
 
 type WheelProps = {
-    wheelDiameter:number
+    wheelDiameter: number
 }
 
-export function Wheel({wheelDiameter}:WheelProps) {
-
+export function Wheel({ wheelDiameter}: WheelProps) {
     const MemoizedCanvas = useMemo(
         () => (
-            <Canvas wheelDiameter={wheelDiameter}/>
+            <Canvas wheelDiameter={wheelDiameter} />
         ),
         [wheelDiameter],
     );

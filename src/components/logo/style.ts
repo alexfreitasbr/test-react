@@ -18,10 +18,10 @@ export const Container = styled.div<ContainerProps>`
     -moz-box-shadow: 7px 8px 34px -8px rgba(0,0,0,0.63);
     box-shadow: 7px 8px 34px -8px rgba(0,0,0,0.63);
     border: 3px solid;
-    border-top-color: rgba(255, 255, 255,.4);
-    border-right-color: rgba(0, 0, 0, .4);
-    border-bottom-color: rgba(0, 0, 0, .4);
-    border-left-color: rgba(255, 255, 255,.4);
+    border-top-color: rgba(150, 150, 150,.3);
+    border-right-color: rgba(0, 0, 0, .3);
+    border-bottom-color: rgba(0, 0, 0, .3);
+    border-left-color: rgba(255, 255, 255,.3);
 
     img{
       width:120px;

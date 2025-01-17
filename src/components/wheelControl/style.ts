@@ -10,18 +10,8 @@ export const Container = styled.div<ContainerProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: ${(props) => props.width + "px" || "520px"};
-    padding: 40px 0;
-    border-radius: 3px;
-    border: 2px solid;
-    border-top-color: rgba(255, 255, 255,.3);
-    border-right-color: rgba(0, 0, 0, .3);
-    border-bottom-color: rgba(0, 0, 0, .3);
-    border-left-color: rgba(255, 255, 255,.3);
-    background: ${(props) => props.backGroundGradient};
-  
     .base{
-        position: relative;
+        position: absolute;
         display: flex;
         justify-content: center;
         align-items: center;
