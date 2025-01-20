@@ -3,9 +3,15 @@ export type PieceType = {
     textColor: string,
     bgColor: string,
     value: number,
+    fontSize: number
   }
 
   export type WheelType = {
     pieces:PieceType[]
     lastLapAngle:number
   };
+
+  export type WheelProviderType ={
+    lapQtd:number
+    moveThoot:boolean 
+  }

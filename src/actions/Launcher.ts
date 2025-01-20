@@ -4,7 +4,6 @@ export const Launcher = class {
     launcher: React.RefObject<any> | undefined;
     startDragPos: number = 0
     currentPosition: number = 0
-    disabled: boolean = false
 
     constructor(launcherRef: React.RefObject<any>) {
         if (launcherRef) {
@@ -13,7 +12,7 @@ export const Launcher = class {
     }
 
     move(xPos: number) {
-        if (xPos === 0 || this.disabled) return
+        if (xPos === 0) return
         this.currentPosition = xPos - this.startDragPos
 
         if (xPos < this.startDragPos) this.currentPosition = 0
@@ -23,21 +22,22 @@ export const Launcher = class {
         this.moveSlider()
 
     }
+
     public drag(xPos: number) {
         this.startDragPos = xPos
     }
 
-    public drop() {
+    drop() {
+        return (this.currentPosition) / (layout.width / 10)
+    }
 
-        if (this.disabled) return
-        this.disabled = true
-
-        // start((xPosition + layout.sliderDiameter) / (layout.width) * 10)
+    public reset() {
         const looping = setInterval(() => {
             this.currentPosition -= (this.currentPosition / 10);
             this.moveSlider()
             if (this.currentPosition < 1) {
                 this.currentPosition = 0
+                this.moveSlider()
                 clearInterval(looping);
             }
         }, 1)

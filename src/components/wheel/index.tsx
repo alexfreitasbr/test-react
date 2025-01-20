@@ -1,6 +1,8 @@
 import Canvas from "../canvas";
-import { useMemo } from 'react';
+import { useContext, useEffect, useMemo, useRef } from 'react';
 import { Container } from './style'
+import WhellContext from "context";
+import { Construction } from "actions/Construction";
 
 
 type WheelProps = {
@@ -8,6 +10,17 @@ type WheelProps = {
 }
 
 export function Wheel({ wheelDiameter}: WheelProps) {
+    const whell = useContext(WhellContext)
+    const wheelRef = useRef<HTMLDivElement>(null);
+
+    const xxxx = new Construction();
+
+    useEffect(() => {
+        if(whell.move.lapQtd === 0)return
+        console.log(whell.move.lapQtd)
+    }, [whell.move.lapQtd])
+    
+    
     const MemoizedCanvas = useMemo(
         () => (
             <Canvas wheelDiameter={wheelDiameter} />
@@ -15,9 +28,9 @@ export function Wheel({ wheelDiameter}: WheelProps) {
         [wheelDiameter],
     );
 
-    return <Container width={wheelDiameter} >
-        {MemoizedCanvas}
-    </Container>
+    return <Container ref={wheelRef} width={wheelDiameter} >
+                {MemoizedCanvas}
+            </Container>
 }
 
 

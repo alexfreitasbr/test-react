@@ -30,6 +30,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
             bgColor: slice.bgColor,
             textColor: slice.textColor,
             label: slice.label,
+            fontSize: slice.fontSize
         }
     })
 
@@ -71,7 +72,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
 
                 ctx.translate(middle.x, middle.y);
                 ctx.fillStyle = slice.textColor;
-                ctx.font = "bold 30px Arial";
+                ctx.font = `bold ${slice.fontSize}px Arial`;
                 ctx.rotate(previousRadian + slice.angle/2 + slice.angle *.09);
                 ctx.fillText(slice.label, (middle.radius - 20) - ctx.measureText(slice.label).width, 0);
                 ctx.restore();
