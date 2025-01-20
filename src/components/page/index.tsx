@@ -1,9 +1,9 @@
 
-import { WheelControl } from 'components/wheelControl'
 import { Container } from './style'
+import {Board } from 'components/board'
 
 export function Page() {
     return  <Container>
-                <WheelControl />
+                <Board />
             </Container>
 }

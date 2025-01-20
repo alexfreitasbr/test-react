@@ -11,7 +11,7 @@ export const Container = styled.div<ContainerProps>`
   width: ${(props) => props.width + "px" || "400px"};
   background: rgba(0,0,0,.2);
   border-radius: 15px;
-  
+  height: 30px;
   .draggable,
   .draggableDummy{
     width: 30px;
