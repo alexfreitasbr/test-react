@@ -1,11 +1,11 @@
 import { WheelDefinition } from 'components/data';
-import { PieceType } from 'components/model';
+import { PieceType, SliceType } from 'components/model';
 
 export class WheelCreate {
     data: PieceType[] = []
     total: number = 0
     part: number = 0
-    slices: any[] = []
+    slices: SliceType[] = []
 
     sum: number = 0
 
@@ -25,7 +25,8 @@ export class WheelCreate {
                 bgColor: slice.bgColor,
                 textColor: slice.textColor,
                 label: slice.label,
-                fontSize: slice.fontSize
+                fontSize: slice.fontSize,
+                deg:0
             }
         })
 
@@ -36,11 +37,11 @@ export class WheelCreate {
         }
     
         this.slices = this.slices.map((slice) => {
-            const angle = (slice.angle * (1/360)) * (2 * Math.PI);
+            const deg = (slice.angle * (1/360)) * (2 * Math.PI);
             
             return {
                 ...slice,
-                deg: angle
+                deg
             }
         })
         return this.slices

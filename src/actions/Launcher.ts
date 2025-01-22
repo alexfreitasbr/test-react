@@ -1,3 +1,4 @@
+import { SliceType } from "components/model";
 import { layout } from "components/wheelSetUp";
 
 export const Launcher = class {
@@ -14,16 +15,12 @@ export const Launcher = class {
     move(xPos: number) {
         if (xPos === 0) return
         this.currentPosition = xPos - this.startDragPos
-
         if (xPos < this.startDragPos) this.currentPosition = 0
-
         if (xPos > this.startDragPos + layout.width - layout.sliderDiameter) this.currentPosition = layout.width - layout.sliderDiameter
-
         this.moveSlider()
-
     }
 
-    public drag(xPos: number) {
+    drag(xPos: number) {
         this.startDragPos = xPos
     }
 
@@ -31,7 +28,7 @@ export const Launcher = class {
         return Math.floor((this.currentPosition) / (layout.width / 10) + 1)
     }
 
-    public reset() {
+    reset() {
         const looping = setInterval(() => {
             this.currentPosition -= (this.currentPosition / 10);
             this.moveSlider()
@@ -43,7 +40,21 @@ export const Launcher = class {
         }, 1)
     }
 
-    public moveSlider() {
+    slowingDown(slices:SliceType[], lapQtd:number,lastLapAngle:number):number {
+        let touch = slices.length * lapQtd
+        let totalAngle  = 0
+        for (let i = 0; i < slices.length; i++) {
+            totalAngle += slices[i].angle
+            if (totalAngle  < lastLapAngle) {
+                touch ++
+            }else{
+                break
+            }
+        }
+        return 1000/touch
+    }
+
+    moveSlider() {
         if (this.launcher?.current) {
             this.launcher.current.style.left = `${this.currentPosition}px`;
         }

@@ -1,5 +1,3 @@
-import { layout } from "components/wheelSetUp";
-
 export class ToothControl {
     tooth: React.RefObject<any> | undefined;
     angle: number = 0;
@@ -10,7 +8,7 @@ export class ToothControl {
     }
 
     spin(speed: number) {
-        this.angle = 0
+        this.angle = -23
         let amount = -1
         const looping = setInterval(() => {
             this.angle += amount

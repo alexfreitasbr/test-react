@@ -13,14 +13,16 @@ export type PieceType = {
 
   export type WheelProviderType ={
     lapQtd:number
-    slices:SliceType[]
-    toothSpeed:number
+    slices:PieceType[]
     wheelSpeed:number
     slowingDown:number
+    lastLapAngle:number
+    spin:boolean
   }
 
   export type SliceType = {
     angle: number,
+    deg: number,
     bgColor: string,
     textColor: string,
     label: string,

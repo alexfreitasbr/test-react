@@ -11,9 +11,10 @@ export default WhellContext
 const userInitialValue: WheelProviderType = {
     lapQtd: 0,
     slices: [],
-    toothSpeed: 0,
     wheelSpeed: 0,
-    slowingDown: 0
+    slowingDown: 0,
+    lastLapAngle: 0,
+    spin: false
 }
 
 export function WhellProvider({ children }: WhellProps) {

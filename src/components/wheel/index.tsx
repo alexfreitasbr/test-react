@@ -4,7 +4,8 @@ import { Container } from './style'
 import WhellContext from "context/wheel";
 import { WheelCreate } from "actions/WheelCreate";
 import { layout } from "components/wheelSetUp";
-
+import { WheelDefinition } from 'components/data';
+import { WheelSpin } from "actions/wheelControl";
 
 export function Wheel() {
     const whell = useContext(WhellContext)
@@ -13,7 +14,6 @@ export function Wheel() {
     const wheelCreate = new WheelCreate();
     const slices = wheelCreate.getSlice();
 
-
     useEffect(() => {
         if (whell.control.slices.length === 0) whell.setControl({ ...whell.control, slices: slices })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -21,10 +21,15 @@ export function Wheel() {
 
 
     useEffect(() => {
-        if (whell.control.lapQtd === 0) return
-        console.log(whell.control.lapQtd)
-    }, [whell.control.lapQtd])
+        if (!whell.control.spin) return
+        const wheelControl = new WheelSpin(whell.control.slices,whell.control.speed,WheelDefinition.lastLapAngle,handleWheel,wheelRef)
+        wheelControl.spin()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [whell.control.spin])
 
+    function handleWheel() {
+        whell.setControl({ ...whell.control, wheelSpeed: 1 })
+    }
 
     const MemoizedCanvas = useMemo(
         () => (

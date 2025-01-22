@@ -5,6 +5,7 @@ import { layout } from "components/wheelSetUp";
 import { Launcher } from 'actions/Launcher';
 import { useContext } from "react"
 import WhellContext from 'context/wheel';
+import { WheelDefinition } from 'components/data';
 
 export function Slider() {
     const [disabled, setDisabled] = useState(false)
@@ -17,7 +18,8 @@ export function Slider() {
 
     function drop(ev: React.DragEvent<HTMLDivElement>) {
         const laps = launcher.drop()
-        whell.setControl({ ...whell.control, lapQtd: laps })
+        const slowingDown = launcher.slowingDown( whell.control.slices, laps, WheelDefinition.lastLapAngle)
+        whell.setControl({ ...whell.control, spin:true, lapQtd: laps, slowingDown: slowingDown })
         launcher.reset()
         setDisabled(true)
     }
