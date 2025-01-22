@@ -1,7 +1,7 @@
 import { WheelDefinition } from 'components/data';
 import { PieceType } from 'components/model';
 
-export class Construction {
+export class WheelCreate {
     data: PieceType[] = []
     total: number = 0
     part: number = 0
@@ -10,13 +10,14 @@ export class Construction {
     sum: number = 0
 
     constructor() {
-         this.data = [...WheelDefinition.pieces].reverse()
-         this.total = this.data.reduce((acc, slice) => acc + slice.value, 0);
-         this.part = 360 / this.total;
+        this.data = [...WheelDefinition.pieces].reverse()
+        this.total = this.data.reduce((acc, slice) => acc + slice.value, 0);
+        this.part = 360 / this.total;
+    }
 
-        
+    getSlice(){
 
-         this.slices = this.data.map((slice) => {
+        this.slices = this.data.map((slice) => {
             const angle = Math.floor(slice.value * this.part) ;
             this.sum += angle;
             return {
@@ -24,6 +25,7 @@ export class Construction {
                 bgColor: slice.bgColor,
                 textColor: slice.textColor,
                 label: slice.label,
+                fontSize: slice.fontSize
             }
         })
 
@@ -41,8 +43,6 @@ export class Construction {
                 deg: angle
             }
         })
-
-        console.log(this.slices)
+        return this.slices
     }
-
 }

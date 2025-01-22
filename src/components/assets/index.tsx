@@ -4,7 +4,7 @@ type ToothProps = {
     color?:string,
 }
 
-export function Tooth({width=34, height=66 , color="#52c551"}:ToothProps) {
+export function ToothImg({width=34, height=66 , color="#52c551"}:ToothProps) {
     return <svg
         width={width}
         height={height}

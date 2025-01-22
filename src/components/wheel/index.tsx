@@ -1,36 +1,41 @@
 import Canvas from "../canvas";
 import { useContext, useEffect, useMemo, useRef } from 'react';
 import { Container } from './style'
-import WhellContext from "context";
-import { Construction } from "actions/Construction";
+import WhellContext from "context/wheel";
+import { WheelCreate } from "actions/WheelCreate";
+import { layout } from "components/wheelSetUp";
 
 
-type WheelProps = {
-    wheelDiameter: number
-}
-
-export function Wheel({ wheelDiameter}: WheelProps) {
-    const whell = useContext(WhellContext)
+export function Wheel() {
+    const whellContext = useContext(WhellContext)
     const wheelRef = useRef<HTMLDivElement>(null);
 
-    const xxxx = new Construction();
+    const wheelCreate = new WheelCreate();
+    const slices = wheelCreate.getSlice();
+
 
     useEffect(() => {
-        if(whell.move.lapQtd === 0)return
-        console.log(whell.move.lapQtd)
-    }, [whell.move.lapQtd])
-    
-    
+        if (whellContext.move.slices.length === 0) whellContext.setMove({ ...whellContext.move, slices: slices })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [slices])
+
+
+    useEffect(() => {
+        if (whellContext.move.lapQtd === 0) return
+        console.log(whellContext.move.lapQtd)
+    }, [whellContext.move.lapQtd])
+
+
     const MemoizedCanvas = useMemo(
         () => (
-            <Canvas wheelDiameter={wheelDiameter} />
+            <Canvas/>
         ),
-        [wheelDiameter],
+        [],
     );
 
-    return <Container ref={wheelRef} width={wheelDiameter} >
-                {MemoizedCanvas}
-            </Container>
+    return <Container ref={wheelRef} width={layout.width} >
+        {MemoizedCanvas}
+    </Container>
 }
 
 

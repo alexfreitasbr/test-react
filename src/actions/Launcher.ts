@@ -28,7 +28,7 @@ export const Launcher = class {
     }
 
     drop() {
-        return (this.currentPosition) / (layout.width / 10)
+        return Math.floor((this.currentPosition) / (layout.width / 10) + 1)
     }
 
     public reset() {

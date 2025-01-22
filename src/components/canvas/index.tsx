@@ -1,41 +1,23 @@
-import  { useEffect, useRef } from 'react'
-import { WheelDefinition } from '../data';
-import { PieceType } from 'components/model';
+import  { useContext, useEffect, useRef } from 'react'
+import WhellContext from 'context/wheel';
+import { layout } from "components/wheelSetUp";
 
-type WheelProps = {
-    wheelDiameter:number
-}
-export default function Canvas({wheelDiameter}: WheelProps) {
 
+export default function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-
-    const data:PieceType[] = [...WheelDefinition.pieces].reverse()
-
-
-    const canvasSize = wheelDiameter;
-    const middle = {
-        x: canvasSize / 2,
-        y: canvasSize / 2,
-        radius: canvasSize / 2,
-    };
-
-    const total = data.reduce((acc, slice) => acc + slice.value, 0);
-    const part = 360 / total;
-
-
-    const slices = data.map((slice) => {
-        const angle = ((slice.value * part)/ 360) * (2 * Math.PI);
-        return {
-            angle: angle,
-            bgColor: slice.bgColor,
-            textColor: slice.textColor,
-            label: slice.label,
-            fontSize: slice.fontSize
-        }
-    })
-
+    const whellContext = useContext(WhellContext)
 
     useEffect(() => {
+        if (whellContext.move.slices.lendth === 0) return
+
+        const canvasSize = layout.width
+        const middle = {
+            x: canvasSize / 2,
+            y: canvasSize / 2,
+            radius: canvasSize / 2,
+        };
+    
+        const slices = whellContext.move.slices;
         const draw = (ctx: CanvasRenderingContext2D) => {
 
             ctx.canvas.width = canvasSize;
@@ -60,7 +42,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
                     middle.y,
                     middle.radius - 2,
                     previousRadian,
-                    previousRadian + slice.angle,
+                    previousRadian + slice.deg,
                     false
                 );
                 ctx.lineWidth = 2;
@@ -73,19 +55,18 @@ export default function Canvas({wheelDiameter}: WheelProps) {
                 ctx.translate(middle.x, middle.y);
                 ctx.fillStyle = slice.textColor;
                 ctx.font = `bold ${slice.fontSize}px Arial`;
-                ctx.rotate(previousRadian + slice.angle/2 + slice.angle *.09);
+                ctx.rotate(previousRadian + slice.deg/2 + slice.deg *.09);
                 ctx.fillText(slice.label, (middle.radius - 20) - ctx.measureText(slice.label).width, 0);
                 ctx.restore();
 
-                previousRadian += slice.angle;
+                previousRadian += slice.deg;
             }
-
 
             previousRadian = 0;
 
             for (const slice of slices) {
-                const lastX = middle.x + (middle.radius -5) *Math.cos(previousRadian + slice.angle);
-                const lastY  = middle.y + (middle.radius -5) *Math.sin(previousRadian + slice.angle);
+                const lastX = middle.x + (middle.radius -5) *Math.cos(previousRadian + slice.deg);
+                const lastY  = middle.y + (middle.radius -5) *Math.sin(previousRadian + slice.deg);
                 ctx.beginPath();
                 
                 ctx.arc(lastX, lastY, 6, 0, 2 * Math.PI);
@@ -96,7 +77,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
                 ctx.strokeStyle = "#bbb";
                 ctx.stroke();
 
-                previousRadian += slice.angle;
+                previousRadian += slice.deg;
             }
         }
         
@@ -107,8 +88,7 @@ export default function Canvas({wheelDiameter}: WheelProps) {
                 draw(context)
             }
         }
-    }, [middle.radius, middle.x, middle.y, slices, canvasSize])
-// }, [angulo, data, fontRotate, fontSize, middle.radius, middle.x, middle.y])
+    }, [whellContext.move.slices])
 
     return <canvas ref={canvasRef}/>
 }

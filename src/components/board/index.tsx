@@ -1,17 +1,15 @@
-import { Tooth } from "components/assets";
 import { Slider } from "components/slider";
+import { Tooth } from "components/tooth";
 import { Wheel } from "components/wheel";
-import { layout } from "components/wheelSetUp";
-import { WhellProvider } from "context";
+import { WhellProvider } from "context/wheel";
+import { Container } from "./style";
 
 export function Board() {
     return <WhellProvider>
-        <div className="ref" >
-            <div className="tooth"> <Tooth /></div>
-        </div>
-        <div >
-            <Wheel wheelDiameter={layout.width} />
-        </div>
-        <Slider/>
-    </WhellProvider>
+                <Container>
+                    <Tooth />
+                    <Wheel />
+                    <Slider />
+                </Container>
+            </WhellProvider>
 }

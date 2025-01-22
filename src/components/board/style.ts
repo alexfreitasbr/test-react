@@ -8,8 +8,10 @@ type ContainerProps = {
 export const Container = styled.div<ContainerProps>`
     position: relative;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
+
     .base{
         position: absolute;
         display: flex;
@@ -37,35 +39,13 @@ export const Container = styled.div<ContainerProps>`
           border-bottom-color: rgba(0, 0, 0, .2);
           border-left-color: rgba(255, 255, 255,.2);
           background: ${(props) => props.backGroundGradient};
-          background: ${(props) => props.backGroundGradient};
           rotate: 185deg;
           filter: blur(3px);
         }
       }
-
   `;
 
-export const ThootContainer= styled.div`
-    display:flex;
-    position:absolute;
-    justify-content:center;
-    width:400px;
-    z-index:10;
-    top:69px;
 
-    .ref{
-      display:flex;
-      flex-direction:column;
-      justify-content:end;
-      width:32px;
-      height:90px;
-      rotate:-29deg;
-      .tooth{
-        width:32px;
-        color:red;
-      }
-    }
-`;
 
 
 

@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { layout } from "components/wheelSetUp";
 import { Launcher } from 'actions/Launcher';
 import { useContext } from "react"
-import WhellContext from 'context';
+import WhellContext from 'context/wheel';
 
 export function Slider() {
     const [disabled, setDisabled] = useState(false)
