@@ -5,10 +5,10 @@ import { layout } from "components/wheelSetUp";
 
 export default function Canvas() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const whellContext = useContext(WhellContext)
+    const whell = useContext(WhellContext)
 
     useEffect(() => {
-        if (whellContext.move.slices.lendth === 0) return
+        if (whell.control.slices.lendth === 0) return
 
         const canvasSize = layout.width
         const middle = {
@@ -17,7 +17,7 @@ export default function Canvas() {
             radius: canvasSize / 2,
         };
     
-        const slices = whellContext.move.slices;
+        const slices = whell.control.slices;
         const draw = (ctx: CanvasRenderingContext2D) => {
 
             ctx.canvas.width = canvasSize;
@@ -88,7 +88,7 @@ export default function Canvas() {
                 draw(context)
             }
         }
-    }, [whellContext.move.slices])
+    }, [whell.control.slices])
 
     return <canvas ref={canvasRef}/>
 }

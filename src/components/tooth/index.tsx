@@ -8,13 +8,13 @@ import WhellContext from 'context/wheel';
 export function Tooth(){
     const toothRef = useRef<HTMLDivElement>(null);
     const toothControl = new ToothControl(toothRef);
-    const whellContext = useContext(WhellContext)
+    const whell = useContext(WhellContext)
 
     toothControl.rotate(-23)
     
     useEffect(() => {
-        if(whellContext.move.toothSpeed === 0) return
-        toothControl.spin(whellContext.move.toothSpeed)
+        if(whell.control.toothSpeed === 0) return
+        toothControl.spin(whell.control.toothSpeed)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [toothControl])
 

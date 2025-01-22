@@ -17,7 +17,7 @@ export function Slider() {
 
     function drop(ev: React.DragEvent<HTMLDivElement>) {
         const laps = launcher.drop()
-        whell.setMove({ ...whell.move, lapQtd: laps })
+        whell.setControl({ ...whell.control, lapQtd: laps })
         launcher.reset()
         setDisabled(true)
     }

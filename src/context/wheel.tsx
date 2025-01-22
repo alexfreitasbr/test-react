@@ -18,10 +18,10 @@ const userInitialValue: WheelProviderType = {
 
 export function WhellProvider({ children }: WhellProps) {
 
-    const [move, setMove] = useState<WheelProviderType>(userInitialValue)
+    const [control, setControl] = useState<WheelProviderType>(userInitialValue)
 
     return (
-        <WhellContext.Provider value={{ move, setMove }}>
+        <WhellContext.Provider value={{ control, setControl }}>
             {children}
         </WhellContext.Provider>
     )

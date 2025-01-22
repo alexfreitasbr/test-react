@@ -7,7 +7,7 @@ import { layout } from "components/wheelSetUp";
 
 
 export function Wheel() {
-    const whellContext = useContext(WhellContext)
+    const whell = useContext(WhellContext)
     const wheelRef = useRef<HTMLDivElement>(null);
 
     const wheelCreate = new WheelCreate();
@@ -15,15 +15,15 @@ export function Wheel() {
 
 
     useEffect(() => {
-        if (whellContext.move.slices.length === 0) whellContext.setMove({ ...whellContext.move, slices: slices })
+        if (whell.control.slices.length === 0) whell.setControl({ ...whell.control, slices: slices })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slices])
 
 
     useEffect(() => {
-        if (whellContext.move.lapQtd === 0) return
-        console.log(whellContext.move.lapQtd)
-    }, [whellContext.move.lapQtd])
+        if (whell.control.lapQtd === 0) return
+        console.log(whell.control.lapQtd)
+    }, [whell.control.lapQtd])
 
 
     const MemoizedCanvas = useMemo(
