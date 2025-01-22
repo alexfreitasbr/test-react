@@ -30,7 +30,7 @@ export function Slider() {
         launcher.drag(ev.clientX)
     }
 
-    return <Container ref={sliderBarRef} width={layout.width} backGroundGradient={layout.gradient}>
+    return <Container ref={sliderBarRef} width={layout.width}>
         <div className='draggable' ref={launchRef}></div>
         {!disabled && <div className='draggableDummy' draggable="true" onDragEnd={drop} onDragStart={drag} onDrag={move}></div>}
     </Container>

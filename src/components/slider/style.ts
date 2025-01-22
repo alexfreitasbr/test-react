@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 type ContainerProps = {
   width?: number;
-  backGroundGradient?: string;
 };
 
 export const Container = styled.div<ContainerProps>`
