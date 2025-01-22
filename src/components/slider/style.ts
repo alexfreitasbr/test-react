@@ -32,9 +32,4 @@ export const Container = styled.div<ContainerProps>`
     position: relative;
     opacity: 0;
   }
-
-  
-
   `;
-
-
