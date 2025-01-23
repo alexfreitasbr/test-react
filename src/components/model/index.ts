@@ -15,7 +15,7 @@ export type PieceType = {
     lapQtd:number
     slices:PieceType[]
     wheelSpeed:number
-    slowingDown:number
+    touches:number
     lastLapAngle:number
     spin:boolean
     speed:number

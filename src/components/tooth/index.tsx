@@ -13,8 +13,7 @@ export function Tooth(){
     toothControl.rotate(-23)
     
     useEffect(() => {
-        console.log(whell.control.speed)
-        if(!whell.control.speed) return
+        if(whell.control.speed === 0) return
         toothControl.spin(whell.control.speed)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [whell.control.speed])

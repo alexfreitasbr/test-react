@@ -12,10 +12,10 @@ const userInitialValue: WheelProviderType = {
     lapQtd: 0,
     slices: [],
     wheelSpeed: 0,
-    slowingDown: 0,
+    touches: 0,
     lastLapAngle: 0,
     spin: false,
-    speed:1
+    speed:0
 }
 
 export function WhellProvider({ children }: WhellProps) {

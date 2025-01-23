@@ -5,25 +5,30 @@ export class WheelSpin {
     slices: SliceType[] = [];
     speed: number = 0;
     lastAngleLap: number = 0;
-    spinThooth: () => void = () => { };
+    changePart: (speed: number) => void ;
     wheelRef: React.RefObject<any> | undefined;
     lapQtd: number = 0;
     fullTurns: number = 0;
     totalAngle = 0
     countParts = 0
+    touches= 0
+    countTouches= 0
 
-    constructor(slices: SliceType[], speed: number, lapQtd: number, lastAngleLap: number, spinThooth: () => void, wheelRef: React.RefObject<any>) {
-        this.slices = slices
-        this.speed = speed
-        this.lapQtd = lapQtd
+    constructor( lastAngleLap: number, changePart: (speed: number) => void, wheelRef: React.RefObject<any>) {
+
         this.lastAngleLap = lastAngleLap
-        this.spinThooth = spinThooth
+        this.changePart = changePart
         this.wheelRef = wheelRef
     }
 
-    startSpin() {
-        this.spinThooth()
+    startSpin(slices: SliceType[], speed: number, lapQtd: number,touches:number) {
+        this.slices = slices.reverse()
+        this.speed = speed
+        this.lapQtd = lapQtd
+        this.changePart(this.speed)
         this.controlSpin()
+        this.touches = touches
+        this.countTouches = touches
     }
 
     controlSpin() {
@@ -43,6 +48,7 @@ export class WheelSpin {
         }
     }
 
+
     rotatePart() {
         let angle = 0
         const looping = setInterval(() => {
@@ -51,7 +57,10 @@ export class WheelSpin {
                 this.totalAngle++
                 this.rotate(this.totalAngle)
                 if (angle + 3 === this.slices[this.countParts].angle) {
-                    this.spinThooth()
+                    this.speed = (this.touches - this.countTouches) * .25 + 0.01
+                    this.countTouches --
+                    console.log(this.speed)
+                    this.changePart(this.speed)
                 }
             } else {
                 this.countParts++
@@ -63,7 +72,9 @@ export class WheelSpin {
 
     rotate(angle: number) {
         if (this.wheelRef && this.wheelRef.current) {
-            // this.wheelRef.current.style.transform = `rotate(${angle}deg)`;
+            this.wheelRef.current.style.transform = `rotate(${angle}deg)`;
         }
     }
-} 
+    
+
+}

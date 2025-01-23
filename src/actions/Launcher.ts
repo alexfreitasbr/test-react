@@ -40,7 +40,7 @@ export const Launcher = class {
         }, 1)
     }
 
-    slowingDown(slices:SliceType[], lapQtd:number,lastLapAngle:number):number {
+    touchCount(slices:SliceType[], lapQtd:number,lastLapAngle:number):number {
         let touch = slices.length * lapQtd
         let totalAngle  = 0
         for (let i = 0; i < slices.length; i++) {
@@ -51,7 +51,7 @@ export const Launcher = class {
                 break
             }
         }
-        return 1000/touch
+        return touch
     }
 
     moveSlider() {

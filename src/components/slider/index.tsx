@@ -18,8 +18,8 @@ export function Slider() {
 
     function drop(ev: React.DragEvent<HTMLDivElement>) {
         const laps = launcher.drop()
-        const slowingDown = launcher.slowingDown( whell.control.slices, laps, WheelDefinition.lastLapAngle)
-        whell.setControl({ ...whell.control, spin:true, lapQtd: laps, slowingDown: slowingDown })
+        const touches = launcher.touchCount( whell.control.slices, laps, WheelDefinition.lastLapAngle)
+        whell.setControl({ ...whell.control, spin:true, lapQtd: laps, touches: touches})
         launcher.reset()
         setDisabled(true)
     }
