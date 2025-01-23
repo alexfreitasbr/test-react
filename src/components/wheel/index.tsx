@@ -19,16 +19,18 @@ export function Wheel() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slices])
 
+    const wheelControl = new WheelSpin(whell.control.slices, whell.control.speed, whell.control.lapQtd, WheelDefinition.lastLapAngle, handleWheel, wheelRef)
 
     useEffect(() => {
         if (!whell.control.spin) return
-        const wheelControl = new WheelSpin(whell.control.slices,whell.control.speed,WheelDefinition.lastLapAngle,handleWheel,wheelRef)
-        wheelControl.spin()
+        const wheelControl = new WheelSpin(whell.control.slices, whell.control.speed, whell.control.lapQtd, WheelDefinition.lastLapAngle, handleWheel, wheelRef)
+        wheelControl.startSpin()
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [whell.control.spin])
 
     function handleWheel() {
-        whell.setControl({ ...whell.control, wheelSpeed: 1 })
+        wheelControl.speed = whell.control.speed *= 1.5 
+        whell.setControl({ ...whell.control, speed: whell.control.speed *= 1.5 })
     }
 
     const MemoizedCanvas = useMemo(

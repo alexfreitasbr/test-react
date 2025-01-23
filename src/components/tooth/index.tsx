@@ -13,10 +13,11 @@ export function Tooth(){
     toothControl.rotate(-23)
     
     useEffect(() => {
-        if(!whell.control.wheelSpeed) return
-        toothControl.spin(whell.control.wheelSpeed)
+        console.log(whell.control.speed)
+        if(!whell.control.speed) return
+        toothControl.spin(whell.control.speed)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [whell.control.wheelSpeed])
+    }, [whell.control.speed])
 
     return  <ThootContainer width={layout.width}>
                 <div ref={toothRef}>

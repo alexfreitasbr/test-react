@@ -18,6 +18,7 @@ export type PieceType = {
     slowingDown:number
     lastLapAngle:number
     spin:boolean
+    speed:number
   }
 
   export type SliceType = {
