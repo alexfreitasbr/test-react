@@ -28,7 +28,7 @@ export class WheelSpin {
         this.changePart(this.speed)
         this.controlSpin()
         this.touches = touches
-        this.countTouches = touches
+        this.countTouches = 80 - touches
     }
 
     controlSpin() {
@@ -57,9 +57,9 @@ export class WheelSpin {
                 this.totalAngle++
                 this.rotate(this.totalAngle)
                 if (angle + 3 === this.slices[this.countParts].angle) {
-                    this.speed = (this.touches - this.countTouches) * .25 + 0.01
-                    this.countTouches --
-                    console.log(this.speed)
+                    this.speed =  (1 - Math.sqrt(1 - Math.pow(this.countTouches /100, 2.5)))*100
+                    this.countTouches ++
+                    console.log(this.speed, this.countTouches)
                     this.changePart(this.speed)
                 }
             } else {
@@ -75,6 +75,4 @@ export class WheelSpin {
             this.wheelRef.current.style.transform = `rotate(${angle}deg)`;
         }
     }
-    
-
 }
