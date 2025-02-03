@@ -15,7 +15,8 @@ const userInitialValue: WheelProviderType = {
     touches: 0,
     lastLapAngle: 0,
     spin: false,
-    speed:0
+    speed:0,
+    ToothAngle: 0,
 }
 
 export function WhellProvider({ children }: WhellProps) {

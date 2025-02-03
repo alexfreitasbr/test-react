@@ -5,7 +5,8 @@ export class WheelSpin {
     slices: SliceType[] = [];
     speed: number = 0;
     lastAngleLap: number = 0;
-    changePart: (speed: number) => void ;
+    changeSpeed: (speed: number) => void ;
+    rotateTooth: (angle: number | null) => void;
     wheelRef: React.RefObject<any> | undefined;
     lapQtd: number = 0;
     fullTurns: number = 0;
@@ -14,18 +15,23 @@ export class WheelSpin {
     touches= 0
     countTouches= 0
 
-    constructor( lastAngleLap: number, changePart: (speed: number) => void, wheelRef: React.RefObject<any>) {
+
+    
+
+
+    constructor( lastAngleLap: number, changeSpeed: (speed: number) => void, rotateTooth: (angle: number | null) => void, wheelRef: React.RefObject<any>) {
 
         this.lastAngleLap = lastAngleLap
-        this.changePart = changePart
+        this.changeSpeed = changeSpeed
         this.wheelRef = wheelRef
+        this.rotateTooth = rotateTooth
     }
 
     startSpin(slices: SliceType[], speed: number, lapQtd: number,touches:number) {
         this.slices = slices.reverse()
         this.speed = speed
         this.lapQtd = lapQtd
-        this.changePart(this.speed)
+        this.changeSpeed(this.speed)
         this.controlSpin()
         this.touches = touches
         this.countTouches = 80 - touches
@@ -56,13 +62,17 @@ export class WheelSpin {
             if (angle <= this.slices[this.countParts].angle) {
                 this.totalAngle++
                 this.rotate(this.totalAngle)
-                if (angle + 3 === this.slices[this.countParts].angle) {
-                    this.speed =  (1 - Math.sqrt(1 - Math.pow(this.countTouches /100, 2.5)))*100
-                    this.countTouches ++
-                    console.log(this.speed, this.countTouches)
-                    this.changePart(this.speed)
+                const rest = this.slices[this.countParts].angle - angle
+                if (rest <= 5 ) {
+                    this.rotateTooth(-25 + (5 * rest))
+                }
+                if (angle <= 4) {
+                    this.rotateTooth(angle*10 - 40)
                 }
             } else {
+                this.countTouches ++
+                this.speed =  (1 - Math.sqrt(1 - Math.pow(this.countTouches /100, 2.5)))*100
+                this.changeSpeed(this.speed)
                 this.countParts++
                 this.controlRotate360()
                 clearInterval(looping)

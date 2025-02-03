@@ -10,13 +10,12 @@ export function Tooth(){
     const toothControl = new ToothControl(toothRef);
     const whell = useContext(WhellContext)
 
-    toothControl.rotate(-23)
     
     useEffect(() => {
-        if(whell.control.speed === 0) return
-        toothControl.spin(whell.control.speed)
+        if(whell.control.ToothAngle === null)return
+        toothControl.rotate(whell.control.ToothAngle)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [whell.control.speed])
+    }, [whell.control.ToothAngle])
 
     return  <ThootContainer width={layout.width}>
                 <div ref={toothRef}>

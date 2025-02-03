@@ -19,6 +19,7 @@ export type PieceType = {
     lastLapAngle:number
     spin:boolean
     speed:number
+    ToothAngle:number
   }
 
   export type SliceType = {

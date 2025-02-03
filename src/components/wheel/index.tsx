@@ -19,7 +19,7 @@ export function Wheel() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slices])
 
-    const wheelControl = new WheelSpin(WheelDefinition.lastLapAngle, changePart, wheelRef)
+    const wheelControl = new WheelSpin(WheelDefinition.lastLapAngle, changeSpeed, rotateTooth, wheelRef)
 
     useEffect(() => {
         if (!whell.control.spin) return
@@ -29,9 +29,14 @@ export function Wheel() {
     }, [whell.control.spin])
     
 
-    function changePart(speed: number) {
+    function changeSpeed(speed: number) {
         whell.setControl({ ...whell.control, speed: speed})
-     }
+    }
+
+    function rotateTooth(angle: number | null) {
+        whell.setControl({ ...whell.control, ToothAngle: angle})
+    }
+
 
     const MemoizedCanvas = useMemo(
         () => (
